@@ -1,18 +1,21 @@
 'use strict';
 
-///////// Biblioteki //////////
+///////// biblioteki //////////
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-///////// Zmienne globalne //////////
+///////// zmienne globalne //////////
 const searchForm = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
-///////// Event Listener dla formularza wyszukiwania //////////
-searchForm.addEventListener('submit', function (event) {
+/////////listener//////////
+searchForm.addEventListener('submit', submitFunction);
+
+/////////funkcja do listenera//////////
+const submitFunction = function (event) {
   event.preventDefault();
 
   const searchTerm = event.target.querySelector('input').value.trim();
@@ -24,8 +27,8 @@ searchForm.addEventListener('submit', function (event) {
     return;
   }
 
-  loader.style.display = 'block'; // Pokazanie wskaźnika ładowania
-  gallery.innerHTML = ''; // Czyszczenie poprzednich wyników wyszukiwania
+  loader.style.display = 'block';
+  gallery.innerHTML = '';
 
   fetchImages(searchTerm)
     .then(response => {
@@ -40,10 +43,10 @@ searchForm.addEventListener('submit', function (event) {
       }
 
       displayImages(response.hits);
-      loader.style.display = 'none'; // Ukrycie wskaźnika ładowania
+      loader.style.display = 'none';
 
       const lightbox = new SimpleLightbox('.gallery a');
-      lightbox.refresh(); // Odświeżenie SimpleLightbox
+      lightbox.refresh();
     })
     .catch(error => {
       iziToast.error({
@@ -51,12 +54,12 @@ searchForm.addEventListener('submit', function (event) {
         message:
           'Sorry, there are no images matching your search query. Please try again!',
       });
-      loader.style.display = 'none'; // Ukrycie wskaźnika ładowania
+      loader.style.display = 'none';
       console.error(error);
     });
-});
+};
 
-///////// Funkcja do pobierania obrazów z backendu //////////
+///////// Funkcja do pobierania obrazów z pixabay //////////
 function fetchImages(query) {
   const apiKey = '44961445-711bc8a23588390ccc23a177e';
   const url = `https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&pretty=true`;
@@ -72,13 +75,31 @@ function fetchImages(query) {
 ///////// Funkcja do wyświetlania obrazów //////////
 function displayImages(images) {
   const markup = images
-    .map(({ webformatURL, largeImageURL, tags }) => {
-      return `
-      <a href="${largeImageURL}" class="gallery-item">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
-      </a>
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `
+      <li class="gallery-item">
+        <a href="${largeImageURL}">
+          <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+        </a>
+        <div class="image-info">
+        <div class ="info-part"><p class="info-name">Likes</p><p class="info-num">${likes}</p></div>
+        <div class ="info-part"><p class="info-name">Views</p><p class="info-num">${views}</p></div>
+        <div class ="info-part"><p class="info-name">Comments</p><p class="info-num">${comments}</p></div>
+        <div class ="info-part"><p class="info-name">Downloads</p><p class="info-num">${downloads}</p></div>
+        </div>
+      </li>
     `;
-    })
+      }
+    )
     .join('');
 
   gallery.innerHTML = markup;

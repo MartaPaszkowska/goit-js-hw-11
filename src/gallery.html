@@ -11,16 +11,17 @@
 </head>
 
 <body>
-  <section class="position">
-    <form class="form" autocomplete="off">
 
-      <input class="input" name="input" placeholder="Search images..." autofocus />
-
-      <button class="button" type="submit">Search</button>
-      <ul class="gallery"></ul>
-      <div class="loader">Loading images, please wait...</div>
+  <header class="header">
+    <h1>Gallery</h1>
+    <a href="./index.html">Co to home</a>
+    <form class="form">
+      <input type="text" name="searchQuery" class="input" placeholder="Search for images..." />
+      <button type="submit" class="btn">Search</button>
     </form>
-  </section>
+  </header>
+  <div class="loader" style="display:none;">Loading images, please wait...</div>
+  <ul class="gallery"></ul>
 </body>
 
 </html>
