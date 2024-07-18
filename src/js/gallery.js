@@ -12,10 +12,7 @@ const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
 /////////listener//////////
-searchForm.addEventListener('submit', submitFunction);
-
-/////////funkcja do listenera//////////
-const submitFunction = function (event) {
+searchForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
   const searchTerm = event.target.querySelector('input').value.trim();
@@ -57,7 +54,7 @@ const submitFunction = function (event) {
       loader.style.display = 'none';
       console.error(error);
     });
-};
+});
 
 ///////// Funkcja do pobierania obrazów z pixabay //////////
 function fetchImages(query) {
