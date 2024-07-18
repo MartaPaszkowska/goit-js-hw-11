@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>01-timer</title>
+  <title>gallery</title>
   <link rel="stylesheet" href="./css/gallery.css" />
   <script type="module" src="./js/gallery.js"></script>
 </head>
@@ -14,10 +14,11 @@
   <section class="position">
     <form class="form" autocomplete="off">
 
-      <input class="input" placeholder="Search images..." autofocus />
+      <input class="input" name="input" placeholder="Search images..." autofocus />
 
       <button class="button" type="submit">Search</button>
-
+      <ul class="gallery"></ul>
+      <div class="loader">Loading images, please wait...</div>
     </form>
   </section>
 </body>

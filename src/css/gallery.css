@@ -48,3 +48,6 @@ input::placeholder {
   cursor: pointer;
   background: #6c8cff;
 }
+.loader {
+  display: none;
+}
