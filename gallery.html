@@ -11,20 +11,21 @@
   <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
   <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-8c59ed88.js">
   <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-1cd1f9d9.css">
-  <link rel="stylesheet" href="/goit-js-hw-11/assets/gallery-bf71b6dc.css">
+  <link rel="stylesheet" href="/goit-js-hw-11/assets/gallery-a8fad68e.css">
 </head>
 
 <body>
-  <section class="position">
-    <form class="form" autocomplete="off">
 
-      <input class="input" name="input" placeholder="Search images..." autofocus />
-
-      <button class="button" type="submit">Search</button>
-      <ul class="gallery"></ul>
-      <div class="loader">Loading images, please wait...</div>
+  <header class="header">
+    <h1>Gallery</h1>
+    <a href="./index.html">Co to home</a>
+    <form class="form">
+      <input type="text" name="searchQuery" class="input" placeholder="Search for images..." />
+      <button type="submit" class="btn">Search</button>
     </form>
-  </section>
+  </header>
+  <div class="loader" style="display:none;">Loading images, please wait...</div>
+  <ul class="gallery"></ul>
 </body>
 
 </html>
